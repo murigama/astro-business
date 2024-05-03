@@ -5,3 +5,7 @@ type i18nconfig = {
   language: string,
   textDirection: 'auto' | 'ltr' | 'rtl'
 }
+
+interface MetaData {
+  title?: string
+}

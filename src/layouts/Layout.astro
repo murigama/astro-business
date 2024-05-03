@@ -2,25 +2,26 @@
 import Header from "@components/common/Header.astro";
 import Footer from "@components/common/Footer.astro";
 import { i18n } from "@/site-config";
+import Favicons from "@/components/helpers/Favicons.astro";
+import CommonMeta from "@/components/helpers/CommonMeta.astro";
 
-interface Props {
-  title: string;
+export interface Props {
+  metadata?: MetaData;
 }
 
-const { title } = Astro.props;
+const { metadata = {} } = Astro.props;
 const { language, textDirection } = i18n;
 ---
 
 <!doctype html>
 <html lang={language} dir={textDirection}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <CommonMeta />
+    <Favicons />
 
     <meta name="description" content="Astro description" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{metadata.title}</title>
   </head>
   <body class="antialiased text-default bg-page tracking-tight">
     <Header />
@@ -28,6 +29,6 @@ const { language, textDirection } = i18n;
       <slot />
     </main>
     <Footer />
+    <style is:global></style>
   </body>
 </html>
-<style is:global></style>
